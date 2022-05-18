@@ -133,9 +133,10 @@ public class DeptViewImpl implements DeptView {
             List<Staff> list= re.getList();
             if(result==1) {
                 System.out.println("删除部门成功！");
-                System.out.println("staff表中以下行的dept_id值为设为空");
+                System.out.println("staff表中以下行的dept_id值将会被设为空");
+                System.out.println("员工id\t\t员工姓名\t\t职务id\t\t上级领导\t\t入职日期\t\t\t工资\t\t奖金\t\t所在部门编号\t\t");
                 for (Staff staff : list) {
-                    System.out.println("员工id\t\t员工姓名\t\t职务id\t\t上级领导\t\t入职日期\t\t\t工资\t\t奖金\t\t所在部门编号\t\t");
+
                     System.out.printf(" %-12d%-10s%-8d%-10d%-18s%-18.1f%-10.1f%-10d", staff.getId(), staff.getEname(), staff.getJob_id(), staff.getMgr(), staff.getJoinDate(), staff.getSalary(), staff.getBonus(), staff.getDept_id());
                 }
             }else {
