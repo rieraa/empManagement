@@ -15,4 +15,9 @@ public interface StaffDao {
 
     public int removeStaff(int staffId);//删除员工信息
 
+
+    public List<Staff> getStaffByDate(String into,String out);//根据入职时间查询
+
+
+
 }

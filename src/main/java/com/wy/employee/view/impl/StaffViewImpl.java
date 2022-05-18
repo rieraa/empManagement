@@ -24,8 +24,8 @@ public class StaffViewImpl implements StaffView {
         List<Staff> list = staffDao.listStaffAll();
         System.out.println("员工id\t\t员工姓名\t\t   职务id\t\t上级领导\t\t\t  入职日期\t\t 工资\t\t奖金\t\t所在部门编号\t\t");
         for (Staff staff : list) {
-            System.out.println(" "+staff.getId()+"\t\t"+" "+staff.getEname()+" \t\t\t"+staff.getJob_id()+"\t\t\t"+staff.getMgr()+
-                    "\t\t\t"+staff.getJoinDate()+"\t\t"+staff.getSalary()+"\t\t"+staff.getBonus()+"\t\t\t"+staff.getDept_id());
+            System.out.println(" " + staff.getId() + "\t\t" + " " + staff.getEname() + " \t\t\t" + staff.getJob_id() + "\t\t\t" + staff.getMgr() +
+                    "\t\t\t" + staff.getJoinDate() + "\t\t" + staff.getSalary() + "\t\t" + staff.getBonus() + "\t\t\t" + staff.getDept_id());
 //            System.out.printf(" %-12d%s%8d%-10d%-18s%-18.1f%-10.1f%-10d", staff.getId(), staff.getEname(), staff.getJob_id(), staff.getMgr(), staff.getJoinDate(), staff.getSalary(), staff.getBonus(), staff.getDept_id());
 //            System.out.println();
         }
@@ -46,8 +46,8 @@ public class StaffViewImpl implements StaffView {
         Staff staff = staffDao.getStaffById(staffId);
         if (staff != null) {
             System.out.println("员工id\t\t员工姓名\t\t   职务id\t\t上级领导\t\t\t  入职日期\t\t 工资\t\t奖金\t\t所在部门编号\t\t");
-            System.out.println(" "+staff.getId()+"\t\t"+" "+staff.getEname()+" \t\t\t"+staff.getJob_id()+"\t\t\t"+staff.getMgr()+
-                    "\t\t\t"+staff.getJoinDate()+"\t\t"+staff.getSalary()+"\t\t"+staff.getBonus()+"\t\t\t"+staff.getDept_id());
+            System.out.println(" " + staff.getId() + "\t\t" + " " + staff.getEname() + " \t\t\t" + staff.getJob_id() + "\t\t\t" + staff.getMgr() +
+                    "\t\t\t" + staff.getJoinDate() + "\t\t" + staff.getSalary() + "\t\t" + staff.getBonus() + "\t\t\t" + staff.getDept_id());
 //            System.out.printf(" %-12d%-10s%-8d%-10d%-18s%-18.1f%-10.1f%-10d", staff.getId(), staff.getEname(), staff.getJob_id(), staff.getMgr(), staff.getJoinDate(), staff.getSalary(), staff.getBonus(), staff.getDept_id());
         } else {
             System.out.println("\n不存在该员工");
@@ -74,8 +74,8 @@ public class StaffViewImpl implements StaffView {
         if (ID > 0) {
             System.out.println("\n新增员工成功！新员工初始信息如下：\n");
             System.out.println("员工id\t\t员工姓名\t\t   职务id\t\t上级领导\t\t\t  入职日期\t\t 工资\t\t奖金\t\t所在部门编号\t\t");
-            System.out.println(" "+staff.getId()+"\t\t"+" "+staff.getEname()+" \t\t\t"+staff.getJob_id()+"\t\t\t"+staff.getMgr()+
-                    "\t\t\t"+staff.getJoinDate()+"\t\t"+staff.getSalary()+"\t\t"+staff.getBonus()+"\t\t\t"+staff.getDept_id());
+            System.out.println(" " + staff.getId() + "\t\t" + " " + staff.getEname() + " \t\t\t" + staff.getJob_id() + "\t\t\t" + staff.getMgr() +
+                    "\t\t\t" + staff.getJoinDate() + "\t\t" + staff.getSalary() + "\t\t" + staff.getBonus() + "\t\t\t" + staff.getDept_id());
 
         } else {
             System.out.println("\n新增员工失败！\n");
@@ -163,15 +163,41 @@ public class StaffViewImpl implements StaffView {
 
         StaffDao dao = new StaffDaoImpl();
         System.out.println("确认要删除吗(y/n)：");
-        if(input.next().equals("y")) {
+        if (input.next().equals("y")) {
             int result = dao.removeStaff(staffId);
-            if(result==1) {
+            if (result == 1) {
                 System.out.println("删除员工成功！");
-            }else {
+            } else {
                 System.out.println("删除员工失败！");
             }
         }
     }
 
+    @Override
+    public void getStaffByDate() {
+        System.out.println("请输入起始日期：");
+        String into = input.next();
+        System.out.println("请输入截止日期：");
+        String out = input.next();
+        StaffDao staffDao = new StaffDaoImpl();
+        List<Staff> list = staffDao.getStaffByDate(into, out);
+        System.out.println("员工id\t\t员工姓名\t\t   职务id\t\t上级领导\t\t\t  入职日期\t\t 工资\t\t奖金\t\t所在部门编号\t\t");
+        for (Staff staff : list) {
+            System.out.println(" " + staff.getId() + "\t\t" + " " + staff.getEname() + " \t\t\t" + staff.getJob_id() + "\t\t\t" + staff.getMgr() +
+                    "\t\t\t" + staff.getJoinDate() + "\t\t" + staff.getSalary() + "\t\t" + staff.getBonus() + "\t\t\t" + staff.getDept_id());
+//            System.out.printf(" %-12d%s%8d%-10d%-18s%-18.1f%-10.1f%-10d", staff.getId(), staff.getEname(), staff.getJob_id(), staff.getMgr(), staff.getJoinDate(), staff.getSalary(), staff.getBonus(), staff.getDept_id());
+//            System.out.println();
+        }
+        try {
+            System.out.println("\n输入回车继续：");
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
+
+
+

@@ -159,4 +159,37 @@ public class StaffDaoImpl implements StaffDao {
         }
         return result;
     }
+
+    @Override
+    public List<Staff> getStaffByDate(String into, String out) {
+        List<Staff> staffList = new ArrayList<>();//通过长度判断是否查询到结果
+        String sql = "SELECT * FROM staff where joinDate>=? and joinDate<=? order by joinDate";//sql语句
+        try {
+
+            con = DBUtil.getConnection();
+            pst = con.prepareStatement(sql);
+            pst.setString(1, into);
+            pst.setString(2,out);
+            rs = pst.executeQuery();//将sql语句进行编译
+            while(rs.next()) {
+                Staff staff = new Staff();//返回单个值时设置为null  如果输入账号密码错误则不能够从数据库中提取出数据 能够作为判断输入是否正确的条件
+                staff.setId(rs.getInt("id"));
+                staff.setEname(rs.getString("ename"));
+                staff.setJob_id(rs.getInt("job_id"));
+                staff.setMgr(rs.getInt("mgr"));
+                staff.setJoinDate(rs.getString("joinDate"));
+                staff.setSalary(rs.getDouble("salary"));
+                staff.setBonus(rs.getDouble("bonus"));
+                staff.setDept_id(rs.getInt("dept_id"));
+                staffList.add(staff);
+            }
+            //返回值将数据库中的数据封装在实例化的一个对象中 表数据转化为对象数据
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pst, con);//避免资源泄露，需要关闭链接
+        }
+        return staffList;
+
+    }
 }

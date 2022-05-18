@@ -52,11 +52,11 @@ public class Entry {
     }
 
     public static void staffManager() {
-        while (menu != 6) {
+        while (menu != 7) {
             //输出主菜单
             System.out.println("\n");
             System.out.println("-------------------------------员工信息-------------------------------");
-            System.out.println("1.查询所有员工|2.按照员工编号查询员工|3.添加员工|4.修改员工|5.删除员工|6.返回上一级");
+            System.out.println("1.查询所有员工|2.按照员工编号查询员工|3.添加员工|4.修改员工|5.删除员工|6.通过日期筛选员工7.返回上一级");
             System.out.println("请输入你的选择(1~6):");
             menu = input.nextInt();
 
@@ -68,8 +68,8 @@ public class Entry {
                 case 3 -> staffView.saveStaff();
                 case 4 -> staffView.editStaff();
                 case 5 -> staffView.removeStaff();
-                case 6 -> {
-                }
+                case 6 -> staffView.getStaffByDate();
+                case 7->{}
                 default -> System.out.println("没有这个选项！\n");
             }
         }
